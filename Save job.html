@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta username="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In and Sign Up Form - Easy Tutorials</title>
+    <link rel="stylesheet" href="asd.css">
+    <script src="https://kit.fontawesome.com/b83f4cf4ae.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<nav>
+    
+    <a href=""><img src="image/Logo.png" alt=""></a>
+    <div class="nav-links">
+        <ul>
+          <li><button onclick="location.href='profile.html'">HOME</li>
+          <li><button onclick="location.href='About us.html'">ABOUT US</li>
+          <li><button onclick="location.href='contact.html'">CONTACT</li>
+          <li><button onclick="location.href='Save job.html'">SAVED JOBS</li>
+        </ul>
+    </div>
+</nav>
+
+
+
+<section id="saved-jobs" class="mainct">
+  <div id="savedJobs"></div>
+
+  <script>
+    // Retrieve favorites from local storage
+    let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+    // Display saved jobs
+    let savedJobsContainer = document.getElementById('savedJobs');
+
+    if (favorites.length === 0) {
+      savedJobsContainer.innerHTML = '<p>No saved jobs yet.</p>';
+    } else {
+      favorites.forEach((savedJob, index) => {
+        // Create a div for each saved job
+        let savedJobDiv = document.createElement('div');
+        savedJobDiv.classList.add('saved-job');
+
+        // Create HTML content for the saved job
+        savedJobDiv.innerHTML = `
+          <h2>${savedJob.title}</h2>
+          <p>Company: ${savedJob.company}</p>
+          <p>Location: ${savedJob.location}</p>
+          <p>Description: ${savedJob.description}</p>
+          <p>Salary: $${savedJob.salary}</p>
+          <!-- Add more details as needed -->
+          <button onclick="location.href='applyforjob.html'">Apply</button>
+          <!-- Delete button -->
+          <button onclick="deleteJob(${index})">Delete</button>
+        `;
+        
+        // Append the saved job div to the container
+        savedJobsContainer.appendChild(savedJobDiv);
+      });
+    }
+
+    // Function to delete a job
+    function deleteJob(index) {
+      // Remove the job from the favorites array
+      favorites.splice(index, 1);
+
+      // Update local storage with the modified favorites list
+      localStorage.setItem('favorites', JSON.stringify(favorites));
+
+      // Refresh the displayed saved jobs
+      displaySavedJobs();
+    }
+
+    // Function to refresh the displayed saved jobs
+    function displaySavedJobs() {
+      savedJobsContainer.innerHTML = ''; // Clear the container
+
+      if (favorites.length === 0) {
+        savedJobsContainer.innerHTML = '<p>No saved jobs yet.</p>';
+      } else {
+        favorites.forEach((savedJob, index) => {
+          // Create a div for each saved job
+          let savedJobDiv = document.createElement('div');
+          savedJobDiv.classList.add('saved-job');
+
+          // Create HTML content for the saved job
+          savedJobDiv.innerHTML = `
+            <h2>${savedJob.title}</h2>
+            <p>Company: ${savedJob.company}</p>
+            <p>Location: ${savedJob.location}</p>
+            <p>Description: ${savedJob.description}</p>
+            <p>Salary: $${savedJob.salary}</p>
+            <!-- Add more details as needed -->
+
+            <!-- Delete button -->
+            <button onclick="deleteJob(${index})">Delete</button>
+          `;
+
+          // Append the saved job div to the container
+          savedJobsContainer.appendChild(savedJobDiv);
+        });
+      }
+    }
+  </script>
+    <!-- Saved jobs will be displayed here -->
+  </section>
+  
+ 
+</body>
+</html>

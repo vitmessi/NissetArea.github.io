@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="applyforjob.css">
+    <title>Contact Form with PDF Upload</title>
+</head>
+<body>
+
+    <button id="Applybtn" onclick="showForm()">Apply Now</button>
+
+    <div class="form-container" id="contactFormContainer">
+        <h1>Apply</h1>
+        <form action="https://api.web3forms.com/submit" method="POST" id="contactForm">
+            <input type="hidden" name="access_key" value="29dce121-928f-4e69-8c6f-cc505bc8b723">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" required></textarea>
+
+            <label for="file">Attach PDF:</label>
+            <input type="file" id="file" name="file" accept=".pdf">
+
+            <button type="submit" onclick="submitForm()">Submit</button>
+            <!-- <button type="submit">Submit Form</button>  -->
+        </form>
+        <button type="button" onclick="location.href='profile.html'">back</button>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
